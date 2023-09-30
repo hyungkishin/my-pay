@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
 
-import javax.validation.Valid;
-
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Membership {
 
@@ -53,9 +51,8 @@ public class Membership {
         String membershipId;
     }
 
-    @Valid
+    @Value
     public static class MembershipName {
-
         public MembershipName(String value) {
             this.nameValue = value;
         }
@@ -63,7 +60,7 @@ public class Membership {
         String nameValue;
     }
 
-    @Valid
+    @Value
     public static class MembershipEmail {
         public MembershipEmail(String value) {
             this.emailValue = value;
@@ -72,9 +69,8 @@ public class Membership {
         String emailValue;
     }
 
-    @Valid
+    @Value
     public static class MembershipAddress {
-
         public MembershipAddress(String value) {
             this.addressValue = value;
         }
@@ -93,7 +89,6 @@ public class Membership {
 
     @Value
     public static class MembershipIsCorp {
-
         public MembershipIsCorp(boolean value) {
             this.isCorpValue = value;
         }
