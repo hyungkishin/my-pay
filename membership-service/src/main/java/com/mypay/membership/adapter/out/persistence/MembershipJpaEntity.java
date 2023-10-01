@@ -43,4 +43,12 @@ public class MembershipJpaEntity {
         this.isCorp = isCorp;
     }
 
+    public void updateMembership(String nameValue, String addressValue, String emailValue, boolean corpValue, boolean validValue) {
+        this.name = nameValue;
+        this.address = addressValue;
+        this.email = emailValue;
+        this.isCorp = corpValue;
+        this.isValid = validValue;
+    }
+
 }

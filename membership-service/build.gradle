@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.5.2'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'com.palantir.docker' version '0.35.0'
 }
 
 group = 'com.mypay.membership'
@@ -24,6 +25,7 @@ repositories {
 }
 
 dependencies {
+    implementation project(path: ':common')
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
@@ -35,6 +37,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation project(path: ':common')
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
@@ -46,4 +51,12 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+docker {
+    println(tasks.bootJar.outputs.files)
+    name rootProject.name + '-' + project.name + ':' + version
+    dockerfile file('./Dockerfile')
+    files tasks.bootJar.outputs.files
+    buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name])
 }
