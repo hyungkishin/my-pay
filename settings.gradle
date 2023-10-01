@@ -8,4 +8,5 @@ pluginManagement {
 rootProject.name = 'demo'
 include 'membership-service'
 include 'membership-service'
+include 'common'
 

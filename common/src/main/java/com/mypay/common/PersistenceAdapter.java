@@ -1,5 +1,4 @@
-package common;
-
+package com.mypay.common;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
@@ -10,9 +9,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Component
-public @interface UseCase {
+public @interface PersistenceAdapter {
 
-    // Application 로직에서 사용 (서비스 Layer) 사용을 하는 케이스
+    // 영속성 계층의 Adapter 를 의미
     @AliasFor(annotation = Component.class)
     String value() default "";
 
