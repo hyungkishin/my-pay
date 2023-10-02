@@ -8,4 +8,5 @@ pluginManagement {
 rootProject.name = 'my-pay'
 include 'membership-service'
 include 'common'
+include 'banking-service'
 
