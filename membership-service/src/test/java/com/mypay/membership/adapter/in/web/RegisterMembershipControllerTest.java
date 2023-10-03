@@ -28,27 +28,27 @@ class RegisterMembershipControllerTest {
     @Autowired
     private ObjectMapper mapper;
 
-//    @Test
-//    @DisplayName("멤버십 가입")
-//    public void registerMembership() throws Exception {
-//        RegisterMembershipRequest request = new RegisterMembershipRequest("name", "email", "address", false);
-//
-//        Membership expect = Membership.generatorMember(
-//                new Membership.MembershipId("1"),
-//                new Membership.MembershipName("name"),
-//                new Membership.MembershipEmail("email"),
-//                new Membership.MembershipAddress("address"),
-//                new Membership.MembershipIsValid(true),
-//                new Membership.MembershipIsCorp(false)
-//        );
-//
-//
-//        mockMvc.perform(
-//                        MockMvcRequestBuilders.post("/membership/register/")
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                                .content(mapper.writeValueAsString(request))
-//                ).andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.content().string(mapper.writeValueAsString(expect)));
-//    }
+    @Test
+    @DisplayName("멤버십 가입")
+    public void registerMembership() throws Exception {
+        RegisterMembershipRequest request = new RegisterMembershipRequest("name", "email", "address", false);
+
+        Membership expect = Membership.generatorMember(
+                new Membership.MembershipId("1"),
+                new Membership.MembershipName("name"),
+                new Membership.MembershipEmail("email"),
+                new Membership.MembershipAddress("address"),
+                new Membership.MembershipIsValid(true),
+                new Membership.MembershipIsCorp(false)
+        );
+
+
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post("/membership/register/")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(request))
+                ).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(mapper.writeValueAsString(expect)));
+    }
 
 }
