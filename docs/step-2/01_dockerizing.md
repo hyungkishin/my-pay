@@ -47,12 +47,12 @@ docker {
 - docker { <- 해당 부분 좌측에 초록색 화살표를 살며시 눌러보자
 
 ### 빌드 성공
-![img.png](img.png)
+![img.png](image/img.png)
 
-![img_1.png](img_1.png)
+![img_1.png](image/img_1.png)
 
 
 ### 또는 terminal 에 아래 명령어 입력
 - docker image ls | grep membership
 
-![img_2.png](img_2.png)
+![img_2.png](image/img_2.png)
