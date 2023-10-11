@@ -112,6 +112,18 @@ services:
       - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
       - LOGGING_TOPIC=mypay.logging.out.stdout
 
+  logging-consumer:
+    image: my-pay-logging-consumer
+    networks:
+      - my_pay_network
+    restart: always
+    depends_on:
+      - kafka
+      - zookeeper
+    environment:
+      - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
+      - LOGGING_TOPIC=mypay.logging.out.stdout
+
 networks:
   my_pay_network:
     driver: bridge
