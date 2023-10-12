@@ -18,7 +18,7 @@ public class BankAccountAdapter implements RequestBankAccountInfoPort, RequestEx
      * real 은행 계좌 -> BankAccount 로 parsing 해야 하지만, 임의로 항상 true 를 return 하게 구현함.
      */
     @Override
-    public BankAccount getBankAccountInfo(GetBankAccountRequest request) {
+    public BankAccount  getBankAccountInfo(GetBankAccountRequest request) {
         return new BankAccount(request.getBankName(), request.getBankAccountNumber(), true);
     }
 

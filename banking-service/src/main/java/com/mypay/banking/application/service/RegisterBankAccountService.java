@@ -4,8 +4,10 @@ import com.mypay.banking.adapter.out.external.bank.BankAccount;
 import com.mypay.banking.adapter.out.external.bank.GetBankAccountRequest;
 import com.mypay.banking.adapter.out.persistence.RegisterBankAccountJpaEntity;
 import com.mypay.banking.adapter.out.persistence.RegisterBankAccountMapper;
+import com.mypay.banking.application.port.out.MembershipStatus;
 import com.mypay.banking.application.port.in.RegisterBankAccountCommand;
 import com.mypay.banking.application.port.in.RegisteredBankAccountUseCase;
+import com.mypay.banking.application.port.out.GetMembershipPort;
 import com.mypay.banking.application.port.out.RegisterBankAccountPort;
 import com.mypay.banking.application.port.out.RequestBankAccountInfoPort;
 import com.mypay.banking.domain.RegisteredBankAccount;
@@ -17,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class RegisterBankAccountService implements RegisteredBankAccountUseCase {
+
+    private final GetMembershipPort getMembershipPort;
 
     private final RegisterBankAccountPort port;
 
@@ -30,6 +34,12 @@ public class RegisterBankAccountService implements RegisteredBankAccountUseCase 
         // 은행 계좌를 등록해야 하는 서비스 (비즈니스 로직)
 
         // (멤버 서비스도 확인?) 해당 부분은 skip
+        // membership svc, 정상인지 확인
+        MembershipStatus membershipStatus = getMembershipPort.getMembership(command.getMembershipId());
+
+        if (!membershipStatus.isValid()) {
+            return null;
+        }
 
         // 1. 등록된 계좌인지 확인한다. -> 외부에 은행이 이 계좌 정상인지? 확인
         // 1-1 Biz Logic -> External System
