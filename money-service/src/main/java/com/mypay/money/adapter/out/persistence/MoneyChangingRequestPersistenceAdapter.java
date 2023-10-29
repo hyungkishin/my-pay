@@ -17,6 +17,7 @@ public class MoneyChangingRequestPersistenceAdapter implements IncreaseMoneyPort
     private final SpringDataMoneyChangingRequestRepository moneyChangingRequestRepository;
 
     private final SpringDataMemberMoneyRepository memberMoneyRepository;
+
     @Override
     public MoneyChangingRequestJpaEntity createMoneyChangingRequest(MoneyChangingRequest.TargetMembershipId targetMembershipId, MoneyChangingRequest.MoneyChangingType moneyChangingType, MoneyChangingRequest.ChangingMoneyAmount changingMoneyAmount, MoneyChangingRequest.MoneyChangingStatus moneyChangingStatus, MoneyChangingRequest.Uuid uuid) {
         return moneyChangingRequestRepository.save(
@@ -35,12 +36,12 @@ public class MoneyChangingRequestPersistenceAdapter implements IncreaseMoneyPort
     public MemberMoneyJpaEntity increaseMoney(MemberMoney.MembershipId memberId, int increaseMoneyAmount) {
         MemberMoneyJpaEntity entity;
         try {
-            List<MemberMoneyJpaEntity> entityList =  memberMoneyRepository.findByMembershipId(Long.parseLong(memberId.getMembershipId()));
+            List<MemberMoneyJpaEntity> entityList = memberMoneyRepository.findByMembershipId(Long.parseLong(memberId.getMembershipId()));
             entity = entityList.get(0);
 
             entity.setBalance(entity.getBalance() + increaseMoneyAmount);
-            return  memberMoneyRepository.save(entity);
-        } catch (Exception e){
+            return memberMoneyRepository.save(entity);
+        } catch (Exception e) {
             entity = new MemberMoneyJpaEntity(
                     Long.parseLong(memberId.getMembershipId()),
                     increaseMoneyAmount

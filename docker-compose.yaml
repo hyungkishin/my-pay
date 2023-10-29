@@ -62,7 +62,7 @@ services:
       - MYSQL_PASSWORD=mysqlpw
 
   membership-service:
-    image: my-pay-membership-service:1.0.2-SNAPSHOT
+    image: my-pay-membership-service:1.0.0
     networks:
       - my_pay_network
     ports:
@@ -79,7 +79,7 @@ services:
       - LOGGING_TOPIC=mypay.logging.out.stdout
 
   banking-service:
-    image: my-pay-banking-service:0.0.1-SNAPSHOT
+    image: my-pay-banking-service:1.0.0
     networks:
       - my_pay_network
     ports:
@@ -97,7 +97,7 @@ services:
       - SERVICE_MEMBERSHIP_URL=http://membership-service:8080
 
   money-service:
-    image: my-pay-money-service:0.0.1-SNAPSHOT
+    image: my-pay-money-service:1.0.0
     networks:
       - my_pay_network
     ports:
@@ -112,9 +112,12 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
       - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
       - LOGGING_TOPIC=mypay.logging.out.stdout
+      - TASK_TOPIC=mypay.task.topic
+      - TASK_RESULT_TOPIC=mypay.task.result.topic
+      - SERVICE_MEMBERSHIP_URL=http://membership-service:8080
 
   logging-consumer:
-    image: my-pay-logging-consumer
+    image: my-pay-logging-consumer:1.0.0
     networks:
       - my_pay_network
     restart: always
@@ -125,6 +128,41 @@ services:
       - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
       - LOGGING_TOPIC=mypay.logging.out.stdout
 
+  task-consumer:
+    image: my-pay-task-consumer:1.0.0
+    networks:
+      - my_pay_network
+    restart: always
+    depends_on:
+      - kafka
+      - zookeeper
+    environment:
+      - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
+      - LOGGING_TOPIC=my.logging.out.stdout
+      - TASK_TOPIC=my.task.topic
+      - TASK_RESULT_TOPIC=mypay.task.result.topic
+
+  remittance-service:
+    image: my-pay-remittance-service:1.0.0
+    networks:
+      - my_pay_network
+    ports:
+      - "8084:8080"
+    restart: always
+    depends_on:
+      - kafka
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/my_pay?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=mysqluser
+      - SPRING_DATASOURCE_PASSWORD=mysqlpw
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
+      - LOGGING_TOPIC=my.logging.out.stdout
+      - SERVICE_MEMBERSHIP_URL=http://membership-service:8080
+      - SERVICE_BANKING_URL=http://banking-service:8080
+      - SERVICE_MONEY_URL=http://money-service:8080
 networks:
   my_pay_network:
     driver: bridge

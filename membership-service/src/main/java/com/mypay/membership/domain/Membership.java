@@ -7,33 +7,32 @@ import lombok.Value;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Membership {
-
     @Getter
     private final String membershipId;
-
     @Getter
     private final String name;
-
     @Getter
     private final String email;
-
     @Getter
     private final String address;
-
     @Getter
     private final boolean isValid;
-
     @Getter
     private final boolean isCorp;
 
-    public static Membership generatorMember(MembershipId membershipId,
-                                             MembershipName membershipName,
-                                             MembershipEmail membershipEmail,
-                                             MembershipAddress membershipAddress,
-                                             MembershipIsValid membershipIsValid,
-                                             MembershipIsCorp membershipIsCorp
+    // Membership
+    // 오염이 되면 안되는 클래스. 고객 정보. 핵심 도메인
+
+    public static Membership generateMember(
+            MembershipId membershipId
+            , MembershipName membershipName
+            , MembershipEmail membershipEmail
+            , MembershipAddress membershipAddress
+            , MembershipIsValid membershipIsValid
+            , MembershipIsCorp membershipIsCorp
     ) {
-        return new Membership(membershipId.membershipId,
+        return new Membership(
+                membershipId.membershipId,
                 membershipName.nameValue,
                 membershipEmail.emailValue,
                 membershipAddress.addressValue,
@@ -95,5 +94,4 @@ public class Membership {
 
         boolean isCorpValue;
     }
-
 }

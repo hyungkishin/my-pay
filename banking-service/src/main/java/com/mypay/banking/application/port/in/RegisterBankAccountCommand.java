@@ -2,15 +2,14 @@ package com.mypay.banking.application.port.in;
 
 import com.mypay.common.SelfValidating;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Builder
-@Getter
+@Data
 @EqualsAndHashCode(callSuper = false)
 public class RegisterBankAccountCommand extends SelfValidating<RegisterBankAccountCommand> {
 
@@ -24,7 +23,6 @@ public class RegisterBankAccountCommand extends SelfValidating<RegisterBankAccou
     @NotBlank
     private final String bankAccountNumber;
 
-    @NotNull
     private final boolean isValid;
 
     public RegisterBankAccountCommand(String membershipId, String bankName, String bankAccountNumber, boolean isValid) {

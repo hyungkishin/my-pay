@@ -1,22 +1,21 @@
 package com.mypay.banking.adapter.out.persistence;
 
-import com.mypay.banking.domain.FirmBankingRequest;
+import com.mypay.banking.domain.FirmbankingRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
 public class FirmbankingRequestMapper {
-
-    public FirmBankingRequest mapToDomainEntity(FirmBankingRequestJpaEntity entity, UUID uuid) {
-        return FirmBankingRequest.generatorFirmbankingRequest(
-                new FirmBankingRequest.FirmBankingRequestId(entity.getRequestFirmbankingId() + ""),
-                new FirmBankingRequest.FromBankName(entity.getFromBankName()),
-                new FirmBankingRequest.FromBankAccountNumber(entity.getFromBankAccountNumber()),
-                new FirmBankingRequest.ToBankName(entity.getToBankName()),
-                new FirmBankingRequest.ToBankAccountNumber(entity.getToBankAccountNumber()),
-                new FirmBankingRequest.Amount(entity.getAmount()),
-                new FirmBankingRequest.FirmBankingStatus(entity.getFirmBankingStatus()),
+    public FirmbankingRequest mapToDomainEntity(FirmbankingRequestJpaEntity registeredBankAccountJpaEntity, UUID uuid) {
+        return FirmbankingRequest.generateFirmbankingRequest(
+                new FirmbankingRequest.FirmbankingRequestId(registeredBankAccountJpaEntity.getRequestFirmbankingId() + ""),
+                new FirmbankingRequest.FromBankName(registeredBankAccountJpaEntity.getFromBankName()),
+                new FirmbankingRequest.FromBankAccountNumber(registeredBankAccountJpaEntity.getFromBankAccountNumber()),
+                new FirmbankingRequest.ToBankName(registeredBankAccountJpaEntity.getToBankName()),
+                new FirmbankingRequest.ToBankAccountNumber(registeredBankAccountJpaEntity.getToBankAccountNumber()),
+                new FirmbankingRequest.MoneyAmount(registeredBankAccountJpaEntity.getMoneyAmount()),
+                new FirmbankingRequest.FirmbankingStatus(registeredBankAccountJpaEntity.getFirmbankingStatus()),
                 uuid
         );
     }

@@ -17,19 +17,15 @@ public class SwaggerConfig {
     @Bean
     public Docket restAPI() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("example")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors
-                        .basePackage("com.mypay.membership"))
+                .apis(RequestHandlerSelectors.basePackage("com.mypay.membership"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-//                .title("Demo")
-//                .description("API EXAMPLE")
                 .build();
     }
 

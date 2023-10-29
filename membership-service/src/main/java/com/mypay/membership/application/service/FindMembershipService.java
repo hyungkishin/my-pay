@@ -8,22 +8,21 @@ import com.mypay.membership.application.port.in.FindMembershipUseCase;
 import com.mypay.membership.application.port.out.FindMembershipPort;
 import com.mypay.membership.domain.Membership;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
-@UseCase
+import javax.transaction.Transactional;
+
 @RequiredArgsConstructor
+@UseCase
 @Transactional
 public class FindMembershipService implements FindMembershipUseCase {
 
-    private final FindMembershipPort findmembershipPort;
+    private final FindMembershipPort findMembershipPort;
 
     private final MembershipMapper membershipMapper;
 
-
     @Override
     public Membership findMembership(FindMembershipCommand command) {
-        MembershipJpaEntity entity = findmembershipPort.findMembership(new Membership.MembershipId(command.getMembershipId()));
-
+        MembershipJpaEntity entity = findMembershipPort.findMembership(new Membership.MembershipId(command.getMembershipId()));
         return membershipMapper.mapToDomainEntity(entity);
     }
 }

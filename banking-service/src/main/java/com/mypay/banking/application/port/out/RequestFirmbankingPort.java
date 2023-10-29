@@ -1,17 +1,20 @@
 package com.mypay.banking.application.port.out;
 
-import com.mypay.banking.adapter.out.persistence.FirmBankingRequestJpaEntity;
-import com.mypay.banking.domain.FirmBankingRequest;
+import com.mypay.banking.adapter.out.persistence.FirmbankingRequestJpaEntity;
+import com.mypay.banking.domain.FirmbankingRequest;
 
 public interface RequestFirmbankingPort {
 
-    FirmBankingRequestJpaEntity createFirmbankingRequest(
-            FirmBankingRequest.FromBankName bankName,
-            FirmBankingRequest.FromBankAccountNumber fromBankAccountNumber,
-            FirmBankingRequest.ToBankName toBankName,
-            FirmBankingRequest.ToBankAccountNumber toBankAccountNumber,
-            FirmBankingRequest.Amount amount,
-            FirmBankingRequest.FirmBankingStatus firmBankingStatus
+    FirmbankingRequestJpaEntity createFirmbankingRequest(
+            FirmbankingRequest.FromBankName fromBankName,
+            FirmbankingRequest.FromBankAccountNumber fromBankAccountNumber,
+            FirmbankingRequest.ToBankName toBankName,
+            FirmbankingRequest.ToBankAccountNumber toBankAccountNumber,
+            FirmbankingRequest.MoneyAmount moneyAmount,
+            FirmbankingRequest.FirmbankingStatus firmbankingStatus
     );
 
+    FirmbankingRequestJpaEntity modifyFirmbankingRequest(
+            FirmbankingRequestJpaEntity entity
+    );
 }

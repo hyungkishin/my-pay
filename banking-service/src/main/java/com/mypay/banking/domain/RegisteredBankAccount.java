@@ -7,7 +7,6 @@ import lombok.Value;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RegisteredBankAccount {
-
     @Getter
     private final String registeredBankAccountId;
 
@@ -24,16 +23,17 @@ public class RegisteredBankAccount {
     private final boolean linkedStatusIsValid;
 
     public static RegisteredBankAccount generateRegisteredBankAccount(
-            RegisteredBankAccount.RegisteredBankAccountId accountId,
+            RegisteredBankAccount.RegisteredBankAccountId registeredBankAccountId,
             RegisteredBankAccount.MembershipId membershipId,
             RegisteredBankAccount.BankName bankName,
-            RegisteredBankAccount.BankAccountNumber accountNumber,
-            RegisteredBankAccount.LinkedStatusIsValid linkedStatusIsValid) {
+            RegisteredBankAccount.BankAccountNumber bankAccountNumber,
+            RegisteredBankAccount.LinkedStatusIsValid linkedStatusIsValid
+    ) {
         return new RegisteredBankAccount(
-                accountId.registeredBankAccountId,
+                registeredBankAccountId.registeredBankAccountId,
                 membershipId.membershipId,
                 bankName.bankName,
-                accountNumber.bankAccountNumber,
+                bankAccountNumber.bankAccountNumber,
                 linkedStatusIsValid.linkedStatusIsValid
         );
     }
@@ -82,5 +82,4 @@ public class RegisteredBankAccount {
 
         boolean linkedStatusIsValid;
     }
-
 }

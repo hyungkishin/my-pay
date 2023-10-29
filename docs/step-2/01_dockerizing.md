@@ -1,13 +1,16 @@
 # Dockerizing
 
-### 도커라이징 ? 
+### 도커라이징 ?
+
 - 어플리케이션을 docker build 를 통해 image 로 만드는 작업. (Containerizing)
 - 일반적으로 dockerfile 이라는 파일에, image 를 빌드하는 일련의 작업을 정의.
 
 #### 장점: 운영 체제와 하드웨어에 독립적 // 환경 일관성 // 격리성 // 빠른 배포와 롤백 가능
+
 #### 단점: 러닝 커브 // docker 라는 추가적인 리소스 // 보안 이슈 // 이미지 크기 최적화가 어렵다.
 
 ### Dockerfile
+
 ```text
 FROM openjdk:11-slim-stretch <- base Image 를 사용
 EXPOSE 8080 <- 해당 port 를 오픈 시킬것이고
@@ -17,6 +20,7 @@ ENTRYPOINT ["java", "-jar", "/app.jar"] <- 해당 이미지가 올라왔을 때 
 ```
 
 ### build.gradle
+
 ```text
 
 plugins {
@@ -41,18 +45,21 @@ docker {
 ```
 
 ### plugins 에 id 'com.palantir.docker' version '0.35.0' 를 추가했다면
+
 - 코끼리가 살고 싶다고 아이콘을 내민다. 눌러주자. ( 재 build )
 
-### 실행해보자 build.gradle 에서 
+### 실행해보자 build.gradle 에서
+
 - docker { <- 해당 부분 좌측에 초록색 화살표를 살며시 눌러보자
 
 ### 빌드 성공
+
 ![img.png](image/img.png)
 
 ![img_1.png](image/img_1.png)
 
-
 ### 또는 terminal 에 아래 명령어 입력
+
 - docker image ls | grep membership
 
 ![img_2.png](image/img_2.png)

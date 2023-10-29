@@ -14,8 +14,9 @@ import java.util.Properties;
 public class LoggingConsumer {
 
     private final KafkaConsumer<String, String> consumer;
+
     public LoggingConsumer(@Value("${kafka.clusters.bootstrapservers}") String bootstrapServers,
-                           @Value("${logging.topic}")String topic) {
+                           @Value("${logging.topic}") String topic) {
 
         Properties props = new Properties();
 
