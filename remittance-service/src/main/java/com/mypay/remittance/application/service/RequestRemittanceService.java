@@ -22,9 +22,13 @@ import javax.transaction.Transactional;
 public class RequestRemittanceService implements RequestRemittanceUseCase {
 
     private final RequestRemittancePort requestRemittancePort;
+
     private final RemittanceRequestMapper mapper;
+
     private final MembershipPort membershipPort;
+
     private final MoneyPort moneyPort;
+
     private final BankingPort bankingPort;
 
     @Override
@@ -43,7 +47,7 @@ public class RequestRemittanceService implements RequestRemittanceUseCase {
         MoneyInfo moneyInfo = moneyPort.getMoneyInfo(command.getFromMembershipId());
 
         // 잔액이 충분치 않은 경우. -> 충전이 필요한 경우
-        if (moneyInfo.getBalance() < command.getAmount()) {
+        if (moneyInfo.isRechargeNeeded(command.getAmount())) {
             // command.getAmount() - moneyInfo.getBalance()
             // 만원 단위로 올림하는 Math 함수
             int rechargeAmount = (int) Math.ceil((command.getAmount() - moneyInfo.getBalance()) / 10000.0) * 10000;
@@ -78,11 +82,12 @@ public class RequestRemittanceService implements RequestRemittanceUseCase {
         }
 
         // 4. 송금 요청 상태를 성공으로 기록 (persistence layer)
-        entity.setRemittanceStatus("success");
+        entity.updateRemittanceStatus("success");
         boolean result = requestRemittancePort.saveRemittanceRequestHistory(entity);
         if (result) {
             return mapper.mapToDomainEntity(entity);
         }
         return null;
     }
+
 }

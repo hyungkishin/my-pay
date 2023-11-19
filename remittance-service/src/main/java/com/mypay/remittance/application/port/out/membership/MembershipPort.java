@@ -1,6 +1,6 @@
 package com.mypay.remittance.application.port.out.membership;
 
-public interface MembershipPort {
+public interface  MembershipPort {
 
     MembershipStatus getMembershipStatus(String membershipId);
 }

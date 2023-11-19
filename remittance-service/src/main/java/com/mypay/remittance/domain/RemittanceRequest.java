@@ -7,19 +7,26 @@ import lombok.Value;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RemittanceRequest { // 송금 요청에 대한 상태 클래스.
+
     @Getter
     private final String remittanceRequestId;
+
     @Getter
     private final String remittanceFromMembershipId;
+
     @Getter
     private final String toBankName;
+
     @Getter
     private final String toBankAccountNumber;
+
     @Getter
     private int remittanceType; // 0: membership(내부 고객), 1: bank (외부 은행 계좌)
+
     // 송금요청 금액
     @Getter
     private int amount;
+
     @Getter
     private String remittanceStatus;
 
@@ -104,4 +111,5 @@ public class RemittanceRequest { // 송금 요청에 대한 상태 클래스.
                 amount.amount, remittanceRequestStatus.remittanceStatus
         );
     }
+
 }

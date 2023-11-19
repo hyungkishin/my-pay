@@ -15,7 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class FindRemittanceService implements FindRemittanceUseCase {
+
     private final FindRemittancePort findRemittancePort;
+
     private final RemittanceRequestMapper mapper;
 
     @Override
@@ -24,4 +26,5 @@ public class FindRemittanceService implements FindRemittanceUseCase {
         findRemittancePort.findRemittanceHistory(command);
         return null;
     }
+
 }
