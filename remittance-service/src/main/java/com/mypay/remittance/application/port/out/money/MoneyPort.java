@@ -8,6 +8,6 @@ public interface MoneyPort {
 
     boolean requestMoneyIncrease(String membershipId, int amount);
 
-    boolean requestMoneyDecrease(String membershipId, int amount);
+    boolean requestMoneyDecrease (String membershipId, int amount);
 
 }
